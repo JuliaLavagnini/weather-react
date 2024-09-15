@@ -1,0 +1,17 @@
+.status {
+  border-left: 1px solid #111317;
+  margin-left: 50px;
+  text-align: center;
+}
+
+.status p {
+  font-size: 1.55em;
+  margin-bottom: 0px;
+  padding-top: 15px;
+  font-weight: 600;
+}
+
+.status h3 {
+  padding-top: 5px;
+  padding-bottom: 15px;
+}

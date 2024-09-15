@@ -1,0 +1,22 @@
+.hourly .row {
+  text-align: center;
+  padding: 50px 5px;
+}
+
+.hourly .col {
+  border-radius: 5%;
+  padding: 10px 5px;
+  background-color: #f9de747a;
+}
+
+.hourly img {
+  width: 40px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.hourly h3 {
+  font-size: 1.25em;
+  font-weight: 600;
+  opacity: 25%;
+}

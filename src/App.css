@@ -1,0 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+.weather-app {
+  margin: 15px auto;
+  padding: 15px 60px;
+  border-radius: 10px;
+  background-color: #f4d45e5c;
+  max-width: 1400px;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  color: #111317;
+}
+
+h3 {
+  margin-bottom: 0px;
+  font-size: 1em;
+}
+
+h1 {
+  font-weight: 900;
+}
+
+h2 {
+  text-align: start;
+  padding: 15px 0px;
+  margin-bottom: 0px;
+  font-weight: 400;
+}
+
+p {
+  margin-bottom: 0px;
+  font-size: 1.25em;
+  font-weight: 600;
+}
+
+.btn {
+  border-radius: 100%;
+}
+
+.weather-app .city {
+  padding-top: 30px;
+  flex-direction: column;
+}
+
+.icon {
+  width: 10.5em;
+}
+
+.temperature {
+  font-size: 5.25em;
+  font-weight: 600;
+}
+
+.description {
+  font-size: 1.25em;
+  font-weight: 300;
+  margin-top: -20px;
+}

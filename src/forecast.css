@@ -1,0 +1,18 @@
+.forecast img {
+  width: 30%;
+}
+
+.forecast .row {
+  background-color: #f9de747a;
+  padding: 15px;
+  margin-bottom: 10px;
+  text-align: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.forecast p {
+  font-size: 1.55em;
+  margin-bottom: 0px;
+  font-weight: 600;
+}
