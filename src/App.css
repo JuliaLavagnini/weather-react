@@ -43,6 +43,15 @@ p {
   flex-direction: column;
 }
 
+.title{
+  justify-content: center;
+  align-items: center;
+}
+
+.title .col-md-2{
+  margin-left: 20px;
+}
+
 .icon {
   width: 10.5em;
 }
