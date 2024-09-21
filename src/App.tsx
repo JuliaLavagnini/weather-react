@@ -2,14 +2,29 @@ import Forecast from "./Forecast";
 import Search from "./Search";
 import WeatherStatus from "./weatherStatus";
 import HourlyForecast from "./hourlyForecast";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import "./App.css";
 
 function App() {
   const [cityName, setCityName] = useState("London");
-  const description = "Partly Cloudy";
-  const temperatureCelsius = 10;
+  const [weatherData, setWeatherData] = useState<any>(null);
   const date = "Sunday";
+
+  const fetchWeatherData = async (city: string) => {
+    try {
+      const response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=3499ef150985eccadd080ff408a018df&units=metric`
+      );
+      setWeatherData(response.data); // Update state with the fetched data
+    } catch (error) {
+      console.error("Error fetching weather data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchWeatherData(cityName); // Fetch data for the current cityName
+  }, [cityName]);
 
   const [isCelsius, setIsCelsius] = useState(true);
 
