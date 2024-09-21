@@ -85,7 +85,7 @@ function App() {
           </p>
         </div>
         <div className="col-md-5">
-          <WeatherStatus isCelsius={isCelsius} weatherData={weatherData}/>
+          <WeatherStatus isCelsius={isCelsius} weatherData={weatherData} />
         </div>
       </div>
       <div className="row">

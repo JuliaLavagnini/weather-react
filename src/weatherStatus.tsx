@@ -13,30 +13,28 @@ function weatherStatus({ isCelsius, weatherData }: WeatherStatusProps) {
   const minimumCelsius = weatherData?.main?.temp_min;
   const feelsLikeCelsius = weatherData?.main?.feels_like;
 
-  let formattedSunrise = '';
-  let formattedSunset = '';
-
+  let formattedSunrise = "";
+  let formattedSunset = "";
 
   if (sunriseTimestamp && sunsetTimestamp) {
-  // Convert sunrise timestamp to Date
-  const sunriseDate = new Date(sunriseTimestamp * 1000); // Convert seconds to milliseconds
-  const sunriseHours = sunriseDate.getHours();
-  const sunriseMinutes = sunriseDate.getMinutes();
-  formattedSunrise = `${sunriseHours.toString().padStart(2, '0')}:${sunriseMinutes.toString().padStart(2, '0')}`;
+    // Convert sunrise timestamp to Date
+    const sunriseDate = new Date(sunriseTimestamp * 1000);
+    const sunriseHours = sunriseDate.getHours();
+    const sunriseMinutes = sunriseDate.getMinutes();
+    formattedSunrise = `${sunriseHours
+      .toString()
+      .padStart(2, "0")}:${sunriseMinutes.toString().padStart(2, "0")}`;
 
-  // Convert sunset timestamp to Date
-  const sunsetDate = new Date(sunsetTimestamp * 1000);
-  const sunsetHours = sunsetDate.getHours();
-  const sunsetMinutes = sunsetDate.getMinutes();
-  formattedSunset = `${sunsetHours.toString().padStart(2, '0')}:${sunsetMinutes.toString().padStart(2, '0')}`;
-
-  console.log(`Data not available`);
-} 
-
-
-
-
-
+    // Convert sunset timestamp to Date
+    const sunsetDate = new Date(sunsetTimestamp * 1000);
+    const sunsetHours = sunsetDate.getHours();
+    const sunsetMinutes = sunsetDate.getMinutes();
+    formattedSunset = `${sunsetHours
+      .toString()
+      .padStart(2, "0")}:${sunsetMinutes.toString().padStart(2, "0")}`;
+  } else {
+    console.log(`Data not available`);
+  }
 
   const convertToFahrenheit = (celsius: number) => {
     return Math.round((celsius * 9) / 5 + 32);
