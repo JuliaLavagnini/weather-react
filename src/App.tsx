@@ -71,21 +71,28 @@ function App() {
         </div>
         <div className="col-md-2">
           <p className="temperature">
-            {isCelsius
-              ? `${temperatureCelsius}°`
-              : `${convertToFahrenheit(temperatureCelsius)}°`}
+            {weatherData && weatherData.main
+              ? isCelsius
+                ? `${Math.round(weatherData.main.temp)}°`
+                : `${convertToFahrenheit(weatherData.main.temp)}°`
+              : "Loading..."}
           </p>
-          <p className="description">{description}</p>
+          <p className="description">
+            {weatherData && weatherData.weather
+              ? weatherData.weather[0].description
+              : "Fetching description..."}{" "}
+            {/* Handle description safely */}
+          </p>
         </div>
         <div className="col-md-5">
-          <WeatherStatus isCelsius={isCelsius} />
+          <WeatherStatus isCelsius={isCelsius} weatherData={weatherData}/>
         </div>
       </div>
       <div className="row">
-        <HourlyForecast isCelsius={isCelsius}/>
+        <HourlyForecast isCelsius={isCelsius} />
       </div>
       <div className="row">
-        <Forecast isCelsius={isCelsius}/>
+        <Forecast isCelsius={isCelsius} />
       </div>
     </div>
   );
