@@ -6,11 +6,11 @@
 .hourly .col {
   border-radius: 5%;
   padding: 10px 5px;
-  background-color: #f9de747a;
+  background-color: #ffffff;
 }
 
 .hourly img {
-  width: 40px;
+  width: 70%;
   padding-top: 10px;
   padding-bottom: 10px;
 }
@@ -18,5 +18,4 @@
 .hourly h3 {
   font-size: 1.25em;
   font-weight: 600;
-  opacity: 25%;
 }

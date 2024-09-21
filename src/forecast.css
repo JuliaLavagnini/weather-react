@@ -3,7 +3,7 @@
 }
 
 .forecast .row {
-  background-color: #f9de747a;
+  background-color: hsla(0, 0%, 100%, 0.637);
   padding: 15px;
   margin-bottom: 10px;
   text-align: center;

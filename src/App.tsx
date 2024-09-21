@@ -52,10 +52,7 @@ function App() {
       </div>
       <div className="row title">
         <div className="col-md-3">
-          <video id="banner-video" autoPlay muted playsInline loop>
-            <source src="src/assets/cloudy-day.webm" type="video/webm" />
-            Your browser does not support the video tag.
-          </video>
+          <img src="src/assets/cloudy-day.gif" alt="icon" />
         </div>
         <div className="col-md-2">
           <p className="temperature">
