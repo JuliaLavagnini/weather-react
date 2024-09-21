@@ -1,15 +1,32 @@
-function Search() {
+import { useState } from "react";
+
+interface FormData {
+  setCityName: (name: string) => void;
+}
+
+function Search({setCityName} : FormData) {
+  const [inputValue, setInputValue] = useState("")
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setCityName(inputValue);
+    setInputValue("");
+  };
+
   return (
-    <div>
-      <form id="search-form" className="d-flex">
-        <input
-          type="search"
-          placeholder="Type a city..."
-          className="form-control me-2"
-          id="search-text"
-        />
-      </form>
-    </div>
+    <form className="d-flex" onSubmit={handleSubmit}>
+      <input
+        name="name"
+        value={inputValue}
+        onChange={handleChange}
+        placeholder="Type a city..."
+        className="form-control me-2"
+      />
+    </form>
   );
 }
 

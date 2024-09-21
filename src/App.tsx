@@ -6,7 +6,7 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const cityName = "London";
+  const [cityName, setCityName] = useState("London");
   const description = "Partly Cloudy";
   const temperatureCelsius = 10;
   const date = "Sunday";
@@ -25,7 +25,7 @@ function App() {
     <div className="weather-app">
       <div className="row">
         <div className="col-md-10">
-          <Search />
+          <Search setCityName={setCityName} />
         </div>
         <div className="col-md-2">
           <button
