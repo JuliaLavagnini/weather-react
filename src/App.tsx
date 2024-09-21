@@ -7,7 +7,7 @@ import axios from "axios";
 import "./App.css";
 
 function App() {
-  const [cityName, setCityName] = useState("London");
+  const [cityName, setCityName] = useState("");
   const [weatherData, setWeatherData] = useState<any>(null);
   const date = "Sunday";
 
@@ -57,43 +57,51 @@ function App() {
           </button>
         </div>
       </div>
-      <div className="row city pb-3">
-        <div className="col">
-          <h1>{cityName}</h1>
+
+      {cityName ? (
+        <>
+          <div className="row city pb-3">
+            <div className="col">
+              <h1>{cityName}</h1>
+            </div>
+            <div className="col">
+              <p>{date}</p>
+            </div>
+          </div>
+          <div className="row title">
+            <div className="col-md-3">
+              <img src="src/assets/cloudy-day.gif" alt="icon" />
+            </div>
+            <div className="col-md-2">
+              <p className="temperature">
+                {weatherData && weatherData.main
+                  ? isCelsius
+                    ? `${Math.round(weatherData.main.temp)}°`
+                    : `${convertToFahrenheit(weatherData.main.temp)}°`
+                  : ""}
+              </p>
+              <p className="description">
+                {weatherData && weatherData.weather
+                  ? weatherData.weather[0].description
+                  : ""}
+              </p>
+            </div>
+            <div className="col-md-5">
+              <WeatherStatus isCelsius={isCelsius} weatherData={weatherData} />
+            </div>
+          </div>
+          <div className="row">
+            <HourlyForecast isCelsius={isCelsius} weatherData={weatherData} />
+          </div>
+          <div className="row">
+            <Forecast isCelsius={isCelsius} weatherData={weatherData} />
+          </div>
+        </>
+      ) : (
+        <div className="d-flex justify-content-center mt-5">
+          <div className="spinner-border" role="status"></div>
         </div>
-        <div className="col">
-          <p>{date}</p>
-        </div>
-      </div>
-      <div className="row title">
-        <div className="col-md-3">
-          <img src="src/assets/cloudy-day.gif" alt="icon" />
-        </div>
-        <div className="col-md-2">
-          <p className="temperature">
-            {weatherData && weatherData.main
-              ? isCelsius
-                ? `${Math.round(weatherData.main.temp)}°`
-                : `${convertToFahrenheit(weatherData.main.temp)}°`
-              : "Loading..."}
-          </p>
-          <p className="description">
-            {weatherData && weatherData.weather
-              ? weatherData.weather[0].description
-              : "Fetching description..."}{" "}
-            {/* Handle description safely */}
-          </p>
-        </div>
-        <div className="col-md-5">
-          <WeatherStatus isCelsius={isCelsius} weatherData={weatherData} />
-        </div>
-      </div>
-      <div className="row">
-        <HourlyForecast isCelsius={isCelsius} />
-      </div>
-      <div className="row">
-        <Forecast isCelsius={isCelsius} />
-      </div>
+      )}
     </div>
   );
 }
