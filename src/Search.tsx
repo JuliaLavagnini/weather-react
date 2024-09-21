@@ -4,8 +4,8 @@ interface FormData {
   setCityName: (name: string) => void;
 }
 
-function Search({setCityName} : FormData) {
-  const [inputValue, setInputValue] = useState("")
+function Search({ setCityName }: FormData) {
+  const [inputValue, setInputValue] = useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
