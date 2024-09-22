@@ -2,6 +2,11 @@ export interface WeatherData {
   current: {
     dt: number;
     temp: number;
+    sunset: number;
+    sunrise: number;
+    feels_like: number;
+    visibility: number;
+    wind_speed: number;
     weather: Array<{
       main: string;
       icon: string;

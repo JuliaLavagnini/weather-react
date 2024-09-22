@@ -1,7 +1,6 @@
 import axios from "axios";
-import { WeatherData } from './types';
 
-const API_KEY = "cabdbda40038ba7d1165b953b1c7bd6c"; // Replace with your OpenWeather API key
+const API_KEY = "445905dadb3d2b0c6f1b916c9d0e3860"; // Replace with your OpenWeather API key
 const BASE_URL = "https://api.openweathermap.org/data/2.5/onecall";
 
 export async function fetchCoordinates(cityName: string) {
@@ -18,12 +17,19 @@ export async function fetchCoordinates(cityName: string) {
   return { lat: data[0].lat, lon: data[0].lon };
 }
 
-export const fetchWeatherData = async (
-  lat: number,
-  lon: number
-): Promise<WeatherData> => {
-  const response = await axios.get(
-    `${BASE_URL}?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`
-  );
-  return response.data;
+export const fetchWeatherData = async (lat: number, lon: number) => {
+  try {
+    const response = await axios.get(BASE_URL, {
+      params: {
+        lat: lat,
+        lon: lon,
+        appid: API_KEY,
+        units: "metric",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching weather data:", error);
+    throw error;
+  }
 };
