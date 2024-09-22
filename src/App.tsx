@@ -4,6 +4,7 @@ import WeatherStatus from "./weatherStatus";
 import HourlyForecast from "./hourlyForecast";
 import { useState, useEffect } from "react";
 import { fetchCoordinates, fetchWeatherData } from "./api";
+import { getWeatherIcon } from "./weatherIcons";
 import "./App.css";
 
 function App() {
