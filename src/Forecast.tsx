@@ -36,17 +36,17 @@ function Forecast({ isCelsius, fiveDayForecast }: ForecastProps) {
 
         return (
           <div className="row" key={index}>
-            <div className="col">
+            <div className="col-3">
               <p>{day}</p>
             </div>
-            <div className="col">
+            <div className="col-3">
               <img src={icon} alt={forecastData.weather[0].main} />
             </div>
-            <div className="col">
+            <div className="col-3">
               <p>{minTemp}°</p>
               <h3>Min</h3>
             </div>
-            <div className="col">
+            <div className="col-3">
               <p>{maxTemp}°</p>
               <h3>Max</h3>
             </div>

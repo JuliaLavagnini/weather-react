@@ -39,11 +39,11 @@ function App() {
 
   return (
     <div className="weather-app">
-      <div className="row">
-        <div className="col-md-10">
+      <div className="row search">
+        <div className="col-md-10 col-sm-9 col-8">
           <Search setCityName={setCityName} />
         </div>
-        <div className="col-md-2">
+        <div className="col-md-2 col-sm-3 col-4 d-flex justify-content-center">
           <button
             className="btn btn-dark"
             onClick={() => handleUnitChange("Celsius")}
@@ -62,7 +62,7 @@ function App() {
       {weatherData && cityName ? (
         <>
           <div className="row city pb-3">
-            <div className="col-md-12">
+        <div className="col-md-12 col-sm-12 col-12">
               <h1>
                 <span className="small-weight">Right now in</span> {cityName}
               </h1>
@@ -76,10 +76,8 @@ function App() {
             </div>
           </div>
           <div className="row title">
-            <div className="col-md-3">
-              {weatherData &&
-              weatherData.current &&
-              weatherData.current.weather ? (
+        <div className="col-md-3 col-sm-6 col-6">
+          {weatherData && weatherData.current && weatherData.current.weather ? (
                 <img
                   src={getWeatherIcon(
                     weatherData.current.weather[0].icon,
@@ -91,7 +89,7 @@ function App() {
                 ""
               )}
             </div>
-            <div className="col-md-4">
+        <div className="col-md-4 col-sm-6 col-6">
               <p className="temperature">
                 {weatherData && weatherData.current
                   ? isCelsius
@@ -110,11 +108,8 @@ function App() {
                 </span>
               </p>
             </div>
-            <div className="col-md-5">
-              <WeatherStatus
-                isCelsius={isCelsius}
-                currentWeather={weatherData}
-              />
+        <div className="col-md-5 col-sm-0">
+          <WeatherStatus isCelsius={isCelsius} currentWeather={weatherData} />
             </div>
           </div>
           <div className="row">

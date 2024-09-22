@@ -53,27 +53,27 @@ function weatherStatus({ isCelsius, currentWeather }: WeatherStatusProps) {
 
   return (
     <div className="row status">
-      <div className="col-md-4">
+      <div className="col-md-4 col-sm-4 col-4">
         <p>{Math.round(convertM_sToKm_m)} km/h</p>
         <h3>Wind</h3>
       </div>
-      <div className="col-md-4">
+      <div className="col-md-4  col-sm-4 col-4">
         <p>{Math.round(feelsLike)}°</p>
         <h3>Feels Like</h3>
       </div>
-      <div className="col-md-4">
+      <div className="col-md-4  col-sm-4 col-4">
         <p>{visibilityHandle}</p>
         <h3>Visibility</h3>
       </div>
-      <div className="col-md-4">
+      <div className="col-md-4  col-sm-4 col-4">
         <p>{sunriseTime}</p>
         <h3>Sunrise</h3>
       </div>
-      <div className="col-md-4">
+      <div className="col-md-4  col-sm-4 col-4">
         <p>{sunsetTime}</p>
         <h3>Sunset</h3>
       </div>
-      <div className="col-md-4">
+      <div className="col-md-4  col-sm-4 col-4">
         <p>{humidity} %</p>
         <h3>Humidity</h3>
       </div>

@@ -18,7 +18,7 @@ function HourlyForecast({ isCelsius, hourlyWeather }: HourlyProps) {
     <div className="hourly">
       <div className="row gap-0 column-gap-3">
         <h2>Today's Weather</h2>
-
+      <div className="hourly-row row gap-0 column-gap-3">
         {hourlyWeather?.hourly.slice(0, 8).map((hourData, index) => {
           const hour = new Date(hourData.dt * 1000).getHours(); // Convert dt from seconds to hours
           const temperature = isCelsius
