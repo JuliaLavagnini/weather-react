@@ -19,6 +19,7 @@ h3 {
 
 h1 {
   font-weight: 900;
+  text-transform: capitalize;
 }
 
 h2 {
@@ -46,6 +47,7 @@ p {
 .title{
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .title .col-md-2{
@@ -53,16 +55,25 @@ p {
 }
 
 .temperature {
-  font-size: 5.25em;
+  font-size: 5em;
   font-weight: 600;
 }
 
 .description {
-  font-size: 1.25em;
-  font-weight: 300;
-  margin-top: -20px;
+  font-size: 1.50em;
+  font-weight: 500;
+  text-transform: capitalize;
 }
 
 .title img{
   width: 100%;
+}
+
+.small-weight{
+  font-weight: 300;
+  text-transform: none;
+}
+
+.minus, .opacity{
+  opacity: 10%;
 }
