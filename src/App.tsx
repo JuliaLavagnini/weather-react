@@ -4,30 +4,25 @@ import WeatherStatus from "./weatherStatus";
 import HourlyForecast from "./hourlyForecast";
 import { useState, useEffect } from "react";
 import { fetchCoordinates, fetchWeatherData } from "./api";
-import { WeatherData } from './types';
 import "./App.css";
 
 function App() {
   const [cityName, setCityName] = useState("");
-  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
+  const [weatherData, setWeatherData] = useState<any | null>(null);
   const [error, setError] = useState<string | null>(null); // State to handle errors
-  const date = "Sunday";
+  const [isCelsius, setIsCelsius] = useState(true);
 
   useEffect(() => {
     const getWeatherData = async () => {
       try {
-        // Fetch coordinates first
-        const { lat, lon } = await fetchCoordinates(cityName);
-
-        // Fetch all weather data using the coordinates
+        const { lat, lon } = await fetchCoordinates(cityName); 
         const data = await fetchWeatherData(lat, lon);
+        console.log(data);
         setWeatherData(data);
-
-        // Clear any previous errors
         setError(null);
       } catch (error) {
-        console.error("Error fetching weather data:", error);
-        setError("Could not fetch weather data. Please try again later.");
+        setError('Could not fetch weather data. Please try again later.');
+        console.error('Error fetching weather data:', error);
       }
     };
 
@@ -35,8 +30,6 @@ function App() {
       getWeatherData();
     }
   }, [cityName]);
-
-  const [isCelsius, setIsCelsius] = useState<boolean>(true);
 
   const handleUnitChange = (unit: string) => {
     setIsCelsius(unit === "Celsius");
@@ -75,7 +68,7 @@ function App() {
               <h1>{cityName}</h1>
             </div>
             <div className="col">
-              <p>{date}</p>
+              <p>{new Date().toLocaleDateString()}</p>
             </div>
           </div>
           <div className="row title">
@@ -84,7 +77,7 @@ function App() {
             </div>
             <div className="col-md-2">
               <p className="temperature">
-                {weatherData.current.temp && isCelsius
+                {weatherData && weatherData.current
                   ? isCelsius
                     ? `${Math.round(weatherData.current.temp)}°`
                     : `${convertToFahrenheit(weatherData.current.temp)}°`

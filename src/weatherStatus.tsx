@@ -6,12 +6,11 @@ interface WeatherStatusProps {
 }
 
 function weatherStatus({ isCelsius, currentWeather }: WeatherStatusProps) {
-  const wind = currentWeather?.wind?.speed || 0;
-  const sunriseTimestamp = currentWeather?.sys?.sunrise;
-  const sunsetTimestamp = currentWeather?.sys?.sunset;
-  const visibility = currentWeather?.visibility;
-  const minimumCelsius = currentWeather?.main?.temp_min;
-  const feelsLikeCelsius = currentWeather?.main?.feels_like;
+  const wind = currentWeather.current.wind_speed || 0;
+  const sunriseTimestamp = currentWeather.current.sunrise;
+  const sunsetTimestamp = currentWeather.current.sunset;
+  const visibility = currentWeather.current.visibility;
+  const feelsLikeCelsius = currentWeather.current.feels_like;
 
   let formattedSunrise = "";
   let formattedSunset = "";
@@ -42,9 +41,7 @@ function weatherStatus({ isCelsius, currentWeather }: WeatherStatusProps) {
 
   const convertM_sToKm_m = wind * 3.6;
 
-  const minimum = isCelsius
-    ? minimumCelsius
-    : convertToFahrenheit(minimumCelsius);
+
 
   const feelsLike = isCelsius
     ? feelsLikeCelsius
@@ -84,7 +81,11 @@ function weatherStatus({ isCelsius, currentWeather }: WeatherStatusProps) {
         <h3>Sunset</h3>
       </div>
       <div className="col-md-4">
-        <p>{Math.round(minimum)}°</p>
+        <p>{currentWeather && currentWeather.daily && currentWeather.daily.length > 0
+                  ? isCelsius
+                    ? `${Math.round(currentWeather.daily[0].temp.min)}°`
+                    : `${convertToFahrenheit(currentWeather.daily[0].temp.min)}°`
+                  : ""}</p>
         <h3>Min</h3>
       </div>
     </div>
