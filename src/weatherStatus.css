@@ -15,3 +15,39 @@
   padding-top: 5px;
   padding-bottom: 15px;
 }
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .status p {
+    font-size: 0.85em;
+  }
+
+  .status {
+    margin-left: 0px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .status {
+    border-left: none;
+    border-top: 1px solid #111317;
+    margin-left: 0px;
+    margin-top: 20px;
+  }
+
+  .status p {
+    font-size: 1.15em;
+  }
+}
+
+@media (max-width: 576px){
+  .status {
+    border-left: none;
+    border-top: 1px solid #111317;
+    margin-left: 0px;
+    margin-top: 20px;
+  }
+
+  .status p {
+    font-size: 0.8em;
+  }
+}

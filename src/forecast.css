@@ -16,3 +16,28 @@
   margin-bottom: 0px;
   font-weight: 600;
 }
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .forecast p {
+    font-size: 1em;
+  }
+
+  .forecast img {
+    width: 60%;
+  }
+}
+
+@media (max-width: 576px) {
+  .forecast p {
+    font-size: 1em;
+  }
+
+  .forecast img {
+    width: 60%;
+  }
+
+  .forecast .row {
+    display: flex;
+    justify-content: space-evenly;
+  }
+}

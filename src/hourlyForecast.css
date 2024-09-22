@@ -19,3 +19,63 @@
   font-size: 1.25em;
   font-weight: 600;
 }
+
+@media (min-width: 576px) and (max-width: 768px) {
+  .hourly .row {
+    padding-bottom: 20px;
+  }
+
+  .hourly-row {
+    overflow-x: auto;
+    gap: 1rem;
+    flex-wrap: nowrap;
+    scroll-snap-type: x mandatory;
+
+    /* Hide scrollbar */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+
+    .hourly-row::-webkit-scrollbar {
+      display: none; /* Safari and Chrome */
+    }
+  }
+
+  .col {
+    flex: 0 0 auto;
+    width: 100px;
+    scroll-snap-align: start;
+  }
+}
+
+@media (max-width: 576px){
+  .hourly .row {
+    padding-bottom: 20px;
+  }
+
+  .hourly-row {
+    overflow-x: auto;
+    gap: 1rem;
+    flex-wrap: nowrap;
+    scroll-snap-type: x mandatory;
+
+    /* Hide scrollbar */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+
+    .hourly-row::-webkit-scrollbar {
+      display: none; /* Safari and Chrome */
+    }
+  }
+
+  .col {
+    flex: 0 0 auto;
+    width: 90px;
+    scroll-snap-align: start;
+  }
+
+  .hourly h3 {
+    font-size: 1em;
+    font-weight: 500;
+  }
+
+}
