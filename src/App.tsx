@@ -16,14 +16,14 @@ function App() {
   useEffect(() => {
     const getWeatherData = async () => {
       try {
-        const { lat, lon } = await fetchCoordinates(cityName); 
+        const { lat, lon } = await fetchCoordinates(cityName);
         const data = await fetchWeatherData(lat, lon);
         console.log(data);
         setWeatherData(data);
         setError(null);
       } catch (error) {
-        setError('Could not fetch weather data. Please try again later.');
-        console.error('Error fetching weather data:', error);
+        setError("Could not fetch weather data. Please try again later.");
+        console.error("Error fetching weather data:", error);
       }
     };
 
@@ -65,29 +65,52 @@ function App() {
       {weatherData && cityName ? (
         <>
           <div className="row city pb-3">
-            <div className="col">
-              <h1>{cityName}</h1>
+            <div className="col-md-12">
+              <h1>
+                <span className="small-weight">Right now in</span> {cityName}
+              </h1>
             </div>
-            <div className="col">
-              <p>{new Date().toLocaleDateString()}</p>
+            <div className="col-md-6 pt-2">
+              <p className="description">
+                {weatherData && weatherData.current.weather
+                  ? weatherData.current.weather[0].description
+                  : ""}
+              </p>
             </div>
           </div>
           <div className="row title">
             <div className="col-md-3">
-              <img src="src/assets/cloudy-day.gif" alt="icon" />
+              {weatherData &&
+              weatherData.current &&
+              weatherData.current.weather ? (
+                <img
+                  src={getWeatherIcon(
+                    weatherData.current.weather[0].icon,
+                    weatherData.current.weather[0].main
+                  )}
+                  alt={weatherData.current.weather[0].main}
+                />
+              ) : (
+                ""
+              )}
             </div>
-            <div className="col-md-2">
+            <div className="col-md-4">
               <p className="temperature">
                 {weatherData && weatherData.current
                   ? isCelsius
                     ? `${Math.round(weatherData.current.temp)}°`
                     : `${convertToFahrenheit(weatherData.current.temp)}°`
                   : ""}
-              </p>
-              <p className="description">
-                {weatherData && weatherData.current.weather
-                  ? weatherData.current.weather[0].description
-                  : ""}
+                <span className="opacity"> | </span>
+                <span className="minus">
+                  {weatherData &&
+                  weatherData.daily &&
+                  weatherData.daily.length > 0
+                    ? isCelsius
+                      ? `${Math.round(weatherData.daily[0].temp.min)}°`
+                      : `${convertToFahrenheit(weatherData.daily[0].temp.min)}°`
+                    : ""}
+                </span>
               </p>
             </div>
             <div className="col-md-5">

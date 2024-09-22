@@ -9,31 +9,24 @@ function weatherStatus({ isCelsius, currentWeather }: WeatherStatusProps) {
   const wind = currentWeather.current.wind_speed || 0;
   const sunriseTimestamp = currentWeather.current.sunrise;
   const sunsetTimestamp = currentWeather.current.sunset;
+  const humidity = currentWeather.current.humidity;
   const visibility = currentWeather.current.visibility;
   const feelsLikeCelsius = currentWeather.current.feels_like;
 
-  let formattedSunrise = "";
-  let formattedSunset = "";
-
-  if (sunriseTimestamp && sunsetTimestamp) {
     // Convert sunrise timestamp to Date
-    const sunriseDate = new Date(sunriseTimestamp * 1000);
-    const sunriseHours = sunriseDate.getHours();
-    const sunriseMinutes = sunriseDate.getMinutes();
-    formattedSunrise = `${sunriseHours
-      .toString()
-      .padStart(2, "0")}:${sunriseMinutes.toString().padStart(2, "0")}`;
+    const sunriseTime = new Date(sunriseTimestamp * 1000).toLocaleString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+    })
+    console.log(sunriseTime)
 
     // Convert sunset timestamp to Date
-    const sunsetDate = new Date(sunsetTimestamp * 1000);
-    const sunsetHours = sunsetDate.getHours();
-    const sunsetMinutes = sunsetDate.getMinutes();
-    formattedSunset = `${sunsetHours
-      .toString()
-      .padStart(2, "0")}:${sunsetMinutes.toString().padStart(2, "0")}`;
-  } else {
-    console.log(`Data not available`);
-  }
+    const sunsetTime = new Date(sunsetTimestamp * 1000).toLocaleString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit', 
+      hour12: true 
+  })
 
   const convertToFahrenheit = (celsius: number) => {
     return Math.round((celsius * 9) / 5 + 32);
@@ -73,20 +66,16 @@ function weatherStatus({ isCelsius, currentWeather }: WeatherStatusProps) {
         <h3>Visibility</h3>
       </div>
       <div className="col-md-4">
-        <p>{formattedSunrise}</p>
+        <p>{sunriseTime}</p>
         <h3>Sunrise</h3>
       </div>
       <div className="col-md-4">
-        <p>{formattedSunset}</p>
+        <p>{sunsetTime}</p>
         <h3>Sunset</h3>
       </div>
       <div className="col-md-4">
-        <p>{currentWeather && currentWeather.daily && currentWeather.daily.length > 0
-                  ? isCelsius
-                    ? `${Math.round(currentWeather.daily[0].temp.min)}°`
-                    : `${convertToFahrenheit(currentWeather.daily[0].temp.min)}°`
-                  : ""}</p>
-        <h3>Min</h3>
+        <p>{humidity} %</p>
+        <h3>Humidity</h3>
       </div>
     </div>
   );
