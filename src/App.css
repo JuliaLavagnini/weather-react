@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 .weather-app {
   margin: 15px auto;
-  padding: 15px 60px;
+  padding: 15px 40px;
   border-radius: 10px;
   background-color: #f4f2f2;
   max-width: 1400px;
@@ -44,13 +44,13 @@ p {
   flex-direction: column;
 }
 
-.title{
+.title {
   justify-content: center;
   align-items: center;
   text-align: center;
 }
 
-.title .col-md-2{
+.title .col-md-2 {
   margin-left: 20px;
 }
 
@@ -60,21 +60,22 @@ p {
 }
 
 .description {
-  font-size: 1.50em;
+  font-size: 1.5em;
   font-weight: 500;
   text-transform: capitalize;
 }
 
-.title img{
+.title img {
   width: 100%;
 }
 
-.small-weight{
+.small-weight {
   font-weight: 300;
   text-transform: none;
 }
 
-.minus, .opacity{
+.minus,
+.opacity {
   opacity: 10%;
 }
 
