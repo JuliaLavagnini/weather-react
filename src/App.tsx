@@ -10,7 +10,6 @@ import "./App.css";
 function App() {
   const [cityName, setCityName] = useState("");
   const [weatherData, setWeatherData] = useState<any | null>(null);
-  const [error, setError] = useState<string | null>(null); // State to handle errors
   const [isCelsius, setIsCelsius] = useState(true);
 
   useEffect(() => {
@@ -20,9 +19,7 @@ function App() {
         const data = await fetchWeatherData(lat, lon);
         console.log(data);
         setWeatherData(data);
-        setError(null);
       } catch (error) {
-        setError("Could not fetch weather data. Please try again later.");
         console.error("Error fetching weather data:", error);
       }
     };
