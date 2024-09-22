@@ -3,30 +3,40 @@ import Search from "./Search";
 import WeatherStatus from "./weatherStatus";
 import HourlyForecast from "./hourlyForecast";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { fetchCoordinates, fetchWeatherData } from "./api";
+import { WeatherData } from './types';
 import "./App.css";
 
 function App() {
   const [cityName, setCityName] = useState("");
-  const [weatherData, setWeatherData] = useState<any>(null);
+  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
+  const [error, setError] = useState<string | null>(null); // State to handle errors
   const date = "Sunday";
 
-  const fetchWeatherData = async (city: string) => {
-    try {
-      const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=3499ef150985eccadd080ff408a018df&units=metric`
-      );
-      setWeatherData(response.data); // Update state with the fetched data
-    } catch (error) {
-      console.error("Error fetching weather data:", error);
-    }
-  };
-
   useEffect(() => {
-    fetchWeatherData(cityName); // Fetch data for the current cityName
+    const getWeatherData = async () => {
+      try {
+        // Fetch coordinates first
+        const { lat, lon } = await fetchCoordinates(cityName);
+
+        // Fetch all weather data using the coordinates
+        const data = await fetchWeatherData(lat, lon);
+        setWeatherData(data);
+
+        // Clear any previous errors
+        setError(null);
+      } catch (error) {
+        console.error("Error fetching weather data:", error);
+        setError("Could not fetch weather data. Please try again later.");
+      }
+    };
+
+    if (cityName) {
+      getWeatherData();
+    }
   }, [cityName]);
 
-  const [isCelsius, setIsCelsius] = useState(true);
+  const [isCelsius, setIsCelsius] = useState<boolean>(true);
 
   const handleUnitChange = (unit: string) => {
     setIsCelsius(unit === "Celsius");
@@ -58,7 +68,7 @@ function App() {
         </div>
       </div>
 
-      {cityName ? (
+      {weatherData && cityName ? (
         <>
           <div className="row city pb-3">
             <div className="col">
@@ -74,27 +84,30 @@ function App() {
             </div>
             <div className="col-md-2">
               <p className="temperature">
-                {weatherData && weatherData.main
+                {weatherData.current.temp && isCelsius
                   ? isCelsius
-                    ? `${Math.round(weatherData.main.temp)}°`
-                    : `${convertToFahrenheit(weatherData.main.temp)}°`
+                    ? `${Math.round(weatherData.current.temp)}°`
+                    : `${convertToFahrenheit(weatherData.current.temp)}°`
                   : ""}
               </p>
               <p className="description">
-                {weatherData && weatherData.weather
-                  ? weatherData.weather[0].description
+                {weatherData && weatherData.current.weather
+                  ? weatherData.current.weather[0].description
                   : ""}
               </p>
             </div>
             <div className="col-md-5">
-              <WeatherStatus isCelsius={isCelsius} weatherData={weatherData} />
+              <WeatherStatus
+                isCelsius={isCelsius}
+                currentWeather={weatherData}
+              />
             </div>
           </div>
           <div className="row">
-            <HourlyForecast isCelsius={isCelsius} weatherData={weatherData} />
+            <HourlyForecast isCelsius={isCelsius} hourlyWeather={weatherData} />
           </div>
           <div className="row">
-            <Forecast isCelsius={isCelsius} weatherData={weatherData} />
+            <Forecast isCelsius={isCelsius} fiveDayForecast={weatherData} />
           </div>
         </>
       ) : (

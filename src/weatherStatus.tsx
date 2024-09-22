@@ -1,17 +1,17 @@
 import "./weatherStatus.css";
 
 interface WeatherStatusProps {
-  weatherData: any;
+  currentWeather: any;
   isCelsius: boolean;
 }
 
-function weatherStatus({ isCelsius, weatherData }: WeatherStatusProps) {
-  const wind = weatherData?.wind?.speed || 0;
-  const sunriseTimestamp = weatherData?.sys?.sunrise;
-  const sunsetTimestamp = weatherData?.sys?.sunset;
-  const visibility = weatherData?.visibility;
-  const minimumCelsius = weatherData?.main?.temp_min;
-  const feelsLikeCelsius = weatherData?.main?.feels_like;
+function weatherStatus({ isCelsius, currentWeather }: WeatherStatusProps) {
+  const wind = currentWeather?.wind?.speed || 0;
+  const sunriseTimestamp = currentWeather?.sys?.sunrise;
+  const sunsetTimestamp = currentWeather?.sys?.sunset;
+  const visibility = currentWeather?.visibility;
+  const minimumCelsius = currentWeather?.main?.temp_min;
+  const feelsLikeCelsius = currentWeather?.main?.feels_like;
 
   let formattedSunrise = "";
   let formattedSunset = "";

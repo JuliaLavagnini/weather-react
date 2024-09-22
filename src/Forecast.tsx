@@ -1,6 +1,11 @@
 import "./forecast.css";
 
-function Forecast({ isCelsius }: { isCelsius: boolean }) {
+interface ForecastProps {
+  fiveDayForecast: any;
+  isCelsius: boolean;
+}
+
+function Forecast({ isCelsius, fiveDayForecast }: ForecastProps) {
   const minimumCelsius = 10;
   const maximumCelsius = 24;
 
