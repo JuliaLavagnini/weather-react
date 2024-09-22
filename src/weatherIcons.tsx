@@ -1,13 +1,13 @@
 export const getWeatherIcon = (icon: string, main: string) => {
   switch (main) {
     case "Snow":
-      return "./assets/snow.gif";
+      return "public/assets/snow.gif";
     case "Rain":
-      return "./assets/rain.gif";
+      return "public/assets/rain.gif";
     case "Thunderstorm":
-      return "./assets/storm.gif";
+      return "public/assets/storm.gif";
     case "Drizzle":
-      return "./assets/rain.gif";
+      return "public/assets/rain.gif";
     case "Mist":
     case "Smoke":
     case "Haze":
@@ -17,14 +17,14 @@ export const getWeatherIcon = (icon: string, main: string) => {
     case "Ash":
     case "Squall":
     case "Tornado":
-      return "./assets/atmosphere.gif";
+      return "public/assets/atmosphere.gif";
     case "Clear":
-      return icon === "01d" ? "./assets/sunny.gif" : "./assets/night.gif";
+      return icon === "01d" ? "public/assets/sunny.gif" : "public/assets/night.gif";
     case "Clouds":
       return icon === "02d" || icon === "02n"
-        ? "./assets/cloudy-day.gif"
-        : "./assets/cloudy-night.gif";
+        ? "public/assets/cloudy-day.gif"
+        : "public/assets/cloudy-night.gif";
     default:
-      return "./assets/weather-forecast.gif"; // Default icon
+      return "public/assets/weather-forecast.gif"; // Default icon
   }
 };
