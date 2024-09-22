@@ -1,133 +1,58 @@
 import "./forecast.css";
+import { WeatherData } from "./types";
+import { getWeatherIcon } from "./weatherIcons";
 
 interface ForecastProps {
-  fiveDayForecast: any;
+  fiveDayForecast: WeatherData | null;
   isCelsius: boolean;
 }
 
 function Forecast({ isCelsius, fiveDayForecast }: ForecastProps) {
-  const minimumCelsius = 10;
-  const maximumCelsius = 24;
-
   const convertToFahrenheit = (celsius: number) => {
     return Math.round((celsius * 9) / 5 + 32);
   };
 
-  const minimum = isCelsius
-    ? minimumCelsius
-    : convertToFahrenheit(minimumCelsius);
-
-  const maximum = isCelsius
-    ? maximumCelsius
-    : convertToFahrenheit(maximumCelsius);
-
   return (
-    <div className="forecast" id="forecast">
+    <div className="forecast">
       <h2>Next 5 days</h2>
-      <div className="row">
-        <div className="col">
-          <p>Monday</p>
-        </div>
-        <div className="col">
-          <img src="src/assets/storm.png" alt="storm" />
-        </div>
-        <div className="col">
-          <p>{minimum}°</p>
-          <h3>Min</h3>
-        </div>
-        <div className="col">
-          <p>{maximum}°</p>
-          <h3>Max</h3>
-        </div>
-        <div className="col">
-          <p>100%</p>
-          <h3>Rain</h3>
-        </div>
-      </div>
 
-      <div className="row">
-        <div className="col">
-          <p>Monday</p>
-        </div>
-        <div className="col">
-          <img src="src/assets/storm.png" alt="storm" />
-        </div>
-        <div className="col">
-          <p>{minimum}°</p>
-          <h3>Min</h3>
-        </div>
-        <div className="col">
-          <p>{maximum}°</p>
-          <h3>Max</h3>
-        </div>
-        <div className="col">
-          <p>100%</p>
-          <h3>Rain</h3>
-        </div>
-      </div>
+      {fiveDayForecast?.daily.slice(1, 6).map((forecastData, index) => {
+        const day = new Date(forecastData.dt * 1000).toLocaleString("en-US", {
+          weekday: "long",
+        });
 
-      <div className="row">
-        <div className="col">
-          <p>Monday</p>
-        </div>
-        <div className="col">
-          <img src="src/assets/storm.png" alt="storm" />
-        </div>
-        <div className="col">
-          <p>{minimum}°</p>
-          <h3>Min</h3>
-        </div>
-        <div className="col">
-          <p>{maximum}°</p>
-          <h3>Max</h3>
-        </div>
-        <div className="col">
-          <p>100%</p>
-          <h3>Rain</h3>
-        </div>
-      </div>
+        const minTemp = isCelsius
+          ? Math.round(forecastData.temp.min)
+          : convertToFahrenheit(forecastData.temp.min);
 
-      <div className="row">
-        <div className="col">
-          <p>Monday</p>
-        </div>
-        <div className="col">
-          <img src="src/assets/storm.png" alt="storm" />
-        </div>
-        <div className="col">
-          <p>{minimum}°</p>
-          <h3>Min</h3>
-        </div>
-        <div className="col">
-          <p>{maximum}°</p>
-          <h3>Max</h3>
-        </div>
-        <div className="col">
-          <p>100%</p>
-          <h3>Rain</h3>
-        </div>
-      </div>
+        const maxTemp = isCelsius
+          ? Math.round(forecastData.temp.max)
+          : convertToFahrenheit(forecastData.temp.max);
 
-      <div className="row">
-        <div className="col">
-          <p>Monday</p>
-        </div>
-        <div className="col">
-          <img src="src/assets/storm.png" alt="storm" />
-        </div>
-        <div className="col">
-          <p>{minimum}°</p>
-          <h3>Min</h3>
-        </div>
-        <div className="col">
-          <p>{maximum}°</p>
-          <h3>Max</h3>
-        </div>
-        <div className="col">
-          <p>100%</p>
-          <h3>Rain</h3>
-        </div>
-      </div>
+        const icon = getWeatherIcon(
+          forecastData.weather[0].icon,
+          forecastData.weather[0].main
+        );
+
+        return (
+          <div className="row" key={index}>
+            <div className="col">
+              <p>{day}</p>
+            </div>
+            <div className="col">
+              <img src={icon} alt={forecastData.weather[0].main} />
+            </div>
+            <div className="col">
+              <p>{minTemp}°</p>
+              <h3>Min</h3>
+            </div>
+            <div className="col">
+              <p>{maxTemp}°</p>
+              <h3>Max</h3>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }
