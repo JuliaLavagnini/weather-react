@@ -8,7 +8,7 @@ import { getWeatherIcon } from "./weatherIcons";
 import "./App.css";
 
 function App() {
-  const [cityName, setCityName] = useState("");
+  const [cityName, setCityName] = useState("London");
   const [weatherData, setWeatherData] = useState<any | null>(null);
   const [isCelsius, setIsCelsius] = useState(true);
 
@@ -45,7 +45,7 @@ function App() {
         </div>
         <div className="col-md-2 col-sm-3 col-4 d-flex justify-content-center">
           <button
-            className="btn btn-dark"
+            className="btn btn-outline-dark"
             onClick={() => handleUnitChange("Celsius")}
           >
             °C
@@ -59,71 +59,61 @@ function App() {
         </div>
       </div>
 
-      {weatherData && cityName ? (
-        <>
-          <div className="row city pb-3">
+      <div className="row city pb-3">
         <div className="col-md-12 col-sm-12 col-12">
-              <h1>
-                <span className="small-weight">Right now in</span> {cityName}
-              </h1>
-            </div>
-            <div className="col-md-6 pt-2">
-              <p className="description">
-                {weatherData && weatherData.current.weather
-                  ? weatherData.current.weather[0].description
-                  : ""}
-              </p>
-            </div>
-          </div>
-          <div className="row title">
+          <h1>
+            <span className="small-weight">Right now in</span> {cityName}
+          </h1>
+        </div>
+        <div className="col-md-6 pt-2">
+          <p className="description">
+            {weatherData && weatherData.current.weather
+              ? weatherData.current.weather[0].description
+              : ""}
+          </p>
+        </div>
+      </div>
+      <div className="row title">
         <div className="col-md-3 col-sm-6 col-6">
           {weatherData && weatherData.current && weatherData.current.weather ? (
-                <img
-                  src={getWeatherIcon(
-                    weatherData.current.weather[0].icon,
-                    weatherData.current.weather[0].main
-                  )}
-                  alt={weatherData.current.weather[0].main}
-                />
-              ) : (
-                ""
+            <img
+              src={getWeatherIcon(
+                weatherData.current.weather[0].icon,
+                weatherData.current.weather[0].main
               )}
-            </div>
+              alt={weatherData.current.weather[0].main}
+            />
+          ) : (
+            ""
+          )}
+        </div>
         <div className="col-md-4 col-sm-6 col-6">
-              <p className="temperature">
-                {weatherData && weatherData.current
-                  ? isCelsius
-                    ? `${Math.round(weatherData.current.temp)}°`
-                    : `${convertToFahrenheit(weatherData.current.temp)}°`
-                  : ""}
-                <span className="opacity"> | </span>
-                <span className="minus">
-                  {weatherData &&
-                  weatherData.daily &&
-                  weatherData.daily.length > 0
-                    ? isCelsius
-                      ? `${Math.round(weatherData.daily[0].temp.min)}°`
-                      : `${convertToFahrenheit(weatherData.daily[0].temp.min)}°`
-                    : ""}
-                </span>
-              </p>
-            </div>
+          <p className="temperature">
+            {weatherData && weatherData.current
+              ? isCelsius
+                ? `${Math.round(weatherData.current.temp)}°`
+                : `${convertToFahrenheit(weatherData.current.temp)}°`
+              : ""}
+            <span className="opacity"> | </span>
+            <span className="minus">
+              {weatherData && weatherData.daily && weatherData.daily.length > 0
+                ? isCelsius
+                  ? `${Math.round(weatherData.daily[0].temp.min)}°`
+                  : `${convertToFahrenheit(weatherData.daily[0].temp.min)}°`
+                : ""}
+            </span>
+          </p>
+        </div>
         <div className="col-md-5 col-sm-0">
           <WeatherStatus isCelsius={isCelsius} currentWeather={weatherData} />
-            </div>
-          </div>
-          <div className="row">
-            <HourlyForecast isCelsius={isCelsius} hourlyWeather={weatherData} />
-          </div>
-          <div className="row">
-            <Forecast isCelsius={isCelsius} fiveDayForecast={weatherData} />
-          </div>
-        </>
-      ) : (
-        <div className="d-flex justify-content-center mt-5">
-          <div className="spinner-border" role="status"></div>
         </div>
-      )}
+      </div>
+      <div className="row">
+        <HourlyForecast isCelsius={isCelsius} hourlyWeather={weatherData} />
+      </div>
+      <div className="row">
+        <Forecast isCelsius={isCelsius} fiveDayForecast={weatherData} />
+      </div>
     </div>
   );
 }

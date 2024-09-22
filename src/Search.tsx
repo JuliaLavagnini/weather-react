@@ -24,7 +24,7 @@ function Search({ setCityName }: FormData) {
         value={inputValue}
         onChange={handleChange}
         placeholder="Type a city..."
-        className="form-control me-2"
+        className="form-control"
       />
     </form>
   );

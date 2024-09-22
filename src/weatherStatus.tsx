@@ -1,40 +1,45 @@
 import "./weatherStatus.css";
+import { WeatherData } from "./types";
 
 interface WeatherStatusProps {
-  currentWeather: any;
+  currentWeather: WeatherData | null;
   isCelsius: boolean;
 }
 
 function weatherStatus({ isCelsius, currentWeather }: WeatherStatusProps) {
-  const wind = currentWeather.current.wind_speed || 0;
+  if (!currentWeather) {
+    return null; 
+  }
+
+  const wind = currentWeather.current.wind_speed;
   const sunriseTimestamp = currentWeather.current.sunrise;
   const sunsetTimestamp = currentWeather.current.sunset;
   const humidity = currentWeather.current.humidity;
   const visibility = currentWeather.current.visibility;
   const feelsLikeCelsius = currentWeather.current.feels_like;
 
-    // Convert sunrise timestamp to Date
-    const sunriseTime = new Date(sunriseTimestamp * 1000).toLocaleString('en-US', {
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: true
-    })
-    console.log(sunriseTime)
+  // Convert sunrise timestamp to Date
+  const sunriseTime = new Date(sunriseTimestamp * 1000).toLocaleString(
+    "en-US",
+    {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    }
+  );
 
-    // Convert sunset timestamp to Date
-    const sunsetTime = new Date(sunsetTimestamp * 1000).toLocaleString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit', 
-      hour12: true 
-  })
+  // Convert sunset timestamp to Date
+  const sunsetTime = new Date(sunsetTimestamp * 1000).toLocaleString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  });
 
   const convertToFahrenheit = (celsius: number) => {
     return Math.round((celsius * 9) / 5 + 32);
   };
 
   const convertM_sToKm_m = wind * 3.6;
-
-
 
   const feelsLike = isCelsius
     ? feelsLikeCelsius

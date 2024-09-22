@@ -18,7 +18,7 @@ function Forecast({ isCelsius, fiveDayForecast }: ForecastProps) {
 
       {fiveDayForecast?.daily.slice(1, 6).map((forecastData, index) => {
         const day = new Date(forecastData.dt * 1000).toLocaleString("en-US", {
-          weekday: "long",
+          weekday: "short",
         });
 
         const minTemp = isCelsius

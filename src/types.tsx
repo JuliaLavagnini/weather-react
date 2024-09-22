@@ -6,6 +6,7 @@ export interface WeatherData {
     sunrise: number;
     feels_like: number;
     visibility: number;
+    humidity: number;
     wind_speed: number;
     weather: Array<{
       main: string;
